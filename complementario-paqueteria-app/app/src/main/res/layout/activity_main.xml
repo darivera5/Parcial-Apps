@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginLeft="100dp"
+            android:layout_marginLeft="65dp"
             android:layout_marginTop="150dp"
             android:text="Peso:"
             android:textSize="16dp" />
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginLeft="100dp"
+            android:layout_marginLeft="65dp"
             android:layout_marginTop="160dp"
             android:ems="2"
             android:inputType="textPersonName"
@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginLeft="270dp"
+            android:layout_marginLeft="240dp"
             android:layout_marginTop="160dp"
             android:ems="2"
             android:inputType="textPersonName"
@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginLeft="270dp"
+            android:layout_marginLeft="240dp"
             android:layout_marginTop="150dp"
             android:text="Zona:"
             android:textSize="16dp" />
@@ -73,17 +73,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginLeft="100dp"
+            android:layout_marginLeft="65dp"
             android:layout_marginTop="250dp"
             android:text="Ubicación:"
             android:textSize="16dp" />
 
         <Spinner
             android:id="@+id/ubicacion"
-            android:layout_width="72dp"
+            android:layout_width="131dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginLeft="100dp"
+            android:layout_marginLeft="65dp"
             android:layout_marginTop="270dp" />
 
         <TextView
@@ -91,17 +91,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginLeft="270dp"
+            android:layout_marginLeft="240dp"
             android:layout_marginTop="250dp"
             android:text="Pais:"
             android:textSize="16dp" />
 
         <Spinner
             android:id="@+id/pais"
-            android:layout_width="89dp"
+            android:layout_width="127dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginLeft="270dp"
+            android:layout_marginLeft="240dp"
             android:layout_marginTop="270dp" />
 
         <Button
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="330dp"
-            android:onClick="calcular"
+            android:onClick="getValues"
             android:text="Calcular"
             android:textSize="10dp" />
 
