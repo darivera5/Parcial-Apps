@@ -2,12 +2,15 @@ package com.gdrivera.paqueteria_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class Gestionar extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     //Declaración del nombre y el peso
@@ -122,4 +125,19 @@ public class Gestionar extends AppCompatActivity implements AdapterView.OnItemSe
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {}
+
+
+    //Método para consultar un registro
+    public void consulta(View view){
+    }
+
+    //Método para eliminar un registro
+    public void eliminar(View view){
+
+    }
+
+    // Método modificar
+    public void modificar(View view){
+
+    }
 }
