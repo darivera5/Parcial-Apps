@@ -2,6 +2,8 @@ package com.gdrivera.paqueteria_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,13 +13,13 @@ import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
 
 public class calcular_activity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     //Declaración de variables widget
-    private EditText zon,pes;
+    private EditText pes,nom,zon;
     private Spinner ubi,pai;
-    private TextView res;
 
     // Declaración de objeto adaptador de arreglos
     ArrayAdapter<String> adapter,a1,a2,a3,a4,a5;
@@ -70,17 +72,20 @@ public class calcular_activity extends AppCompatActivity implements AdapterView.
             "Corea del norte",
     };
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calcular_activity);
 
         //Declaración de variables para obtener valores de los elementos.
-        zon = (EditText)findViewById(R.id.zona);
+        zon = (EditText) findViewById(R.id.zona);
         pes = (EditText)findViewById(R.id.peso);
+        nom = (EditText)findViewById(R.id.txtnombre);
         ubi = (Spinner) findViewById(R.id.ubicacion);
         pai = (Spinner)findViewById(R.id.pais);
-        res = (TextView)findViewById(R.id.respuesta);
+        //res = (TextView)findViewById(R.id.respuesta);
 
         ubi.setOnItemSelectedListener(this);
         pai.setOnItemSelectedListener(this);
@@ -95,22 +100,23 @@ public class calcular_activity extends AppCompatActivity implements AdapterView.
 
         ubi.setAdapter(adapter);
 
+
     }
 
     //Función para obtener los valores y verificar que no estén vacios
     public void getValues(View v){
         String zona  = zon.getText().toString();
         String peso = pes.getText().toString();
+        String nombre = nom.getText().toString();
 
-
-        if(zona.length() == 0){
-            Toast notification = Toast.makeText(this,
-                    "Ingresa el número de la zona",
-                    Toast.LENGTH_SHORT);
-            notification.show();
-        }else if(peso.length() == 0){
+         if(peso.length() == 0){
             Toast notification = Toast.makeText(this,
                     "Ingresa el peso del paquete",
+                    Toast.LENGTH_SHORT);
+            notification.show();
+        }else if(nombre.length() == 0){
+            Toast notification = Toast.makeText(this,
+                    "Ingresa tu nombre completo",
                     Toast.LENGTH_SHORT);
             notification.show();
         }else{
@@ -141,7 +147,13 @@ public class calcular_activity extends AppCompatActivity implements AdapterView.
                 respuesta = 5300*pe;
             }
             String valor = String.valueOf(respuesta);
-            res.setText("El valor por la entrega del paquete es de:/n/n"+valor);
+
+            Intent i = new Intent(calcular_activity.this,Respuesta.class); // Creo intent que referencie la primera y segunda ventana
+            i.putExtra("nombre",nom.getText()+"");
+            i.putExtra("ubicacion",ubi.getSelectedItem()+"");
+            i.putExtra("pais",pai.getSelectedItem()+"");
+            i.putExtra("costo",valor+"");// Paso el parametro nombre con el metodo putExtra
+            startActivity(i);// Activo la intención que se va a enviar
         }
     }
 
@@ -175,4 +187,7 @@ public class calcular_activity extends AppCompatActivity implements AdapterView.
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
+
+
 }

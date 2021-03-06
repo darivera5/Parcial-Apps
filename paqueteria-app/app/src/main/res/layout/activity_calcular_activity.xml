@@ -9,10 +9,9 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/teal_200"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-166dp"
-        tools:layout_editor_absoluteY="-41dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
             android:id="@+id/d"
@@ -25,12 +24,32 @@
             android:textSize="20dp" />
 
         <TextView
+            android:id="@+id/etnombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="65dp"
+            android:layout_marginTop="160dp"
+            android:text="Nombre:"
+            android:textSize="16dp" />
+
+        <EditText
+            android:id="@+id/txtnombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="150dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="16dp" />
+
+        <TextView
             android:id="@+id/f"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginLeft="65dp"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="220dp"
             android:text="Peso:"
             android:textSize="16dp" />
 
@@ -40,22 +59,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginLeft="65dp"
-            android:layout_marginTop="175dp"
-            android:ems="3"
+            android:layout_marginTop="250dp"
+            android:ems="4"
             android:inputType="textPersonName"
             android:textSize="16dp" />
 
-
-        <EditText
-            android:id="@+id/zona"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginLeft="220dp"
-            android:layout_marginTop="175dp"
-            android:ems="3"
-            android:inputType="textPersonName"
-            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/textView5"
@@ -63,8 +71,21 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginLeft="220dp"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="220dp"
             android:text="Zona:"
+            android:textSize="16dp" />
+
+
+
+        <EditText
+            android:id="@+id/zona"
+            android:layout_width="94dp"
+            android:layout_height="44dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="220dp"
+            android:layout_marginTop="250dp"
+            android:ems="4"
+            android:inputType="textPersonName"
             android:textSize="16dp" />
 
         <TextView
@@ -73,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginLeft="65dp"
-            android:layout_marginTop="250dp"
+            android:layout_marginTop="340dp"
             android:text="Ubicación:"
             android:textSize="16dp" />
 
@@ -83,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginLeft="65dp"
-            android:layout_marginTop="270dp" />
+            android:layout_marginTop="380dp" />
 
         <TextView
             android:id="@+id/j"
@@ -91,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginLeft="220dp"
-            android:layout_marginTop="250dp"
+            android:layout_marginTop="340dp"
             android:text="Pais:"
             android:textSize="16dp" />
 
@@ -101,26 +122,18 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginLeft="220dp"
-            android:layout_marginTop="270dp" />
+            android:layout_marginTop="380dp" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="124dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="330dp"
-            android:text="Calcular"
+            android:layout_marginTop="450dp"
             android:onClick="getValues"
+            android:text="Calcular"
             android:textSize="10dp" />
 
-        <TextView
-            android:id="@+id/respuesta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="380dp"
-            android:text="Resultado"
-            android:textSize="16dp" />
 
 
     </FrameLayout>
