@@ -3,6 +3,7 @@ package com.gdrivera.paqueteria_app;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +15,7 @@ import android.widget.Toast;
 
 public class Gestionar extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     //Declaración del nombre y el peso
-    private EditText etNombre,etPeso;
+    private EditText etNombre,etZona, etPeso, etCosto;
     // Declaración de los Spiner
     private Spinner ubi,pai;
 
@@ -126,18 +127,106 @@ public class Gestionar extends AppCompatActivity implements AdapterView.OnItemSe
     @Override
     public void onNothingSelected(AdapterView<?> parent) {}
 
-
     //Método para consultar un registro
     public void consulta(View view){
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(
+                this,
+                "paqueteria",
+                null,
+                1);
+
+        SQLiteDatabase bd = admin.getWritableDatabase();
+
+        String nombre = etNombre.getText().toString();
+
+        Cursor fila = bd.rawQuery("SELECT nombre_producto, zona, peso, continente, pais, costo" +
+                " FROM paquetes" +
+                " WHERE nombre_producto =" + nombre, null);
+
+        if(fila.moveToFirst()){
+            etNombre.setText(fila.getString(0));
+            etZona.setText(fila.getString(1));
+            etPeso.setText(fila.getString(2));
+            etCosto.setText(fila.getString(5));
+        }else{
+            Toast.makeText(this, "No existe el producto con ese nombre",
+                    Toast.LENGTH_SHORT).show();
+            bd.close();
+        }
+
     }
 
     //Método para eliminar un registro
     public void eliminar(View view){
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(
+                this,
+                "paqueteria",
+                null,
+                1);
 
+        SQLiteDatabase bd = admin.getWritableDatabase();
+
+        String nombre = etNombre.getText().toString();
+
+        if(nombre.length() == 0){
+            Toast.makeText(this, "Deja el campo vacío",
+                    Toast.LENGTH_SHORT).show();
+        }else{
+            int cant = bd.delete("paquetes", "nombre_producto="+nombre, null);
+
+            bd.close();
+
+            etNombre.setText("");
+            etCosto.setText("");
+            etPeso.setText("");
+            etZona.setText("");
+
+            if(cant == 1){
+                Toast.makeText(this, "Se la paqueteria con el nombre: " + nombre,
+                        Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(this, "No existe el paquete con dicho nombre",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     // Método modificar
-    public void modificar(View view){
+    public void modificar(View view) {
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(
+                this,
+                "paqueteria",
+                null,
+                1);
+
+        SQLiteDatabase bd = admin.getWritableDatabase();
+
+        String nombre = etNombre.getText().toString();
+        String peso = etPeso.getText().toString();
+        String zona = etZona.getText().toString();
+        String costo = etCosto.getText().toString();
+
+        ContentValues registro = new ContentValues();
+        /*
+         * nombre_producto text, peso real, zona text,continente text, pais text, costo real
+         * */
+        registro.put("nombre_producto", nombre);
+        registro.put("peso", peso);
+        registro.put("zona", zona);
+        registro.put("costo", costo);
+
+        int cant = bd.update("paquetes",
+                registro,
+                "nombre_producto=" + nombre,
+                null);
+
+        bd.close();
+
+        if (cant == 1) {
+            Toast.makeText(this, "Se modificaron los datos", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "no se modificaron los datos", Toast.LENGTH_SHORT).show();
+        }
 
     }
 }
