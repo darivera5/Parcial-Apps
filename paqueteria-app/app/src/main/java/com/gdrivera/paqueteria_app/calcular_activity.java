@@ -146,6 +146,7 @@ public class calcular_activity extends AppCompatActivity implements AdapterView.
             }else{
                 respuesta = 5300*pe;
             }
+            insertar(respuesta);
             String valor = String.valueOf(respuesta);
 
             Intent i = new Intent(calcular_activity.this,Respuesta.class); // Creo intent que referencie la primera y segunda ventana
@@ -188,6 +189,25 @@ public class calcular_activity extends AppCompatActivity implements AdapterView.
 
     }
 
-
+    public void insertar(int costo){
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"paqueteria", null , 1);
+        SQLiteDatabase bd = admin.getWritableDatabase();
+        String nombre = nom.getText().toString();
+        int peso = Integer.parseInt(pes.getText().toString());
+        String zona = zon.getText().toString();
+        String ubica = ubi.getSelectedItem().toString();
+        String pais = pai.getSelectedItem().toString();
+        ContentValues registro = new ContentValues();
+        registro.put("nombre_producto",nombre);
+        registro.put("peso",peso);
+        registro.put("zona",zona);
+        registro.put("continente",ubica);
+        registro.put("pais",pais);
+        registro.put("costo",costo);
+        bd.insert("paquetes",null,registro);
+        bd.close();
+        Toast notificacion = Toast.makeText(this,"Se cargo la cotización",Toast.LENGTH_SHORT);
+        notificacion.show();
+    }
 
 }

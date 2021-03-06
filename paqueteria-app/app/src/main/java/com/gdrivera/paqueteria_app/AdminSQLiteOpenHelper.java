@@ -14,7 +14,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table paquetes(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "nombre_producto text, peso real, continente text, pais text, costo real)");
+                "nombre_producto text, peso real, zona text,continente text, pais text, costo real)");
     }
 
     @Override
