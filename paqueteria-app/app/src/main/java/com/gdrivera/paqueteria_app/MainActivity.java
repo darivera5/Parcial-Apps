@@ -36,8 +36,9 @@ public class MainActivity extends AppCompatActivity {
         miBoton =(Button)findViewById(R.id.btnCalcular);
         miBoton.setOnClickListener(new View.OnClickListener() {
             @Override
+            // Creo intent que referencie la primera y segunda ventana
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,calcular_activity.class); // Creo intent que referencie la primera y segunda ventana
+                Intent i = new Intent(MainActivity.this,calcular_activity.class);
                 startActivity(i);// Activo la intención que se va a enviar
             }
         });

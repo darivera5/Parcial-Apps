@@ -69,6 +69,10 @@ public class Gestionar extends AppCompatActivity implements AdapterView.OnItemSe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_gestionar);
+
         //Declaración de variables para obtener valores de los elementos.
         etNombre = (EditText)findViewById(R.id.etNombre);
         etPeso = (EditText)findViewById(R.id.etPeso);
@@ -88,8 +92,6 @@ public class Gestionar extends AppCompatActivity implements AdapterView.OnItemSe
 
         ubi.setAdapter(adapter);
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gestionar);
     }
 
     // Método para anidar los spinner
