@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             // Es gratis
             tvResultado.setText("Menor de 4 años va gratis");
 
-        }else if(edad > 4 && edad < 7){
+        }else if(edad >= 4 && edad <= 7){
             // 40% de descuento
             Double resultado = precioTiquete * DESCUENTO40;
             respuesta(40, resultado, "tener edad entre 4 y 7 años");
