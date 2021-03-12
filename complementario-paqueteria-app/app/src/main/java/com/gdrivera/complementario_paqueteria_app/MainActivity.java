@@ -2,6 +2,7 @@ package com.gdrivera.complementario_paqueteria_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.AlertDialog;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     //Declaración de variables widget
@@ -81,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         pes = (EditText)findViewById(R.id.peso);
         ubi = (Spinner) findViewById(R.id.ubicacion);
         pai = (Spinner)findViewById(R.id.pais);
-        res = (TextView)findViewById(R.id.respuesta);
+
 
 
         ubi.setOnItemSelectedListener(this);
@@ -103,11 +105,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void getValues(View v){
         String zona  = zon.getText().toString();
         String peso = pes.getText().toString();
+        int zo = Integer.parseInt(zona);
 
-
-        if(zona.length() == 0){
+        if(zona.length() == 0 || zo >  5){
             Toast notification = Toast.makeText(this,
-                    "Ingresa el número de la zona",
+                    "Ingresa el número de la zona del 1 al 5",
                     Toast.LENGTH_SHORT);
             notification.show();
         }else if(peso.length() == 0){
@@ -116,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     Toast.LENGTH_SHORT);
             notification.show();
         }else{
-            int zo = Integer.parseInt(zona);
             int pe = Integer.parseInt(peso);
             calcular(zo, pe);
         }
@@ -128,8 +129,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         int respuesta ;
 
         if(pe > 5){
-            Toast notificacion = Toast.makeText(this,"La entrega es rechazada no se puede transportar con peso mayor de 5 kg",Toast.LENGTH_SHORT);
-            notificacion.show();
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this); //instancia de la alerta
+            dialogBuilder.setMessage("La entrega es rechazada no se puede transportar con peso mayor de 5 kg"); //setiamos el mensaje a mostrar
+
+            dialogBuilder.setCancelable(true).setTitle("Cotización Denegada");//Titulo de la ventana y que se pueda cancelar
+
+            dialogBuilder.create().show(); // Mostrar Ventana
         }else{
             if(zo == 1 ){
                 respuesta = 3800*pe;
@@ -143,7 +148,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 respuesta = 5300*pe;
             }
             String valor = String.valueOf(respuesta);
-            res.setText("El valor por la entrega del paquete es de: "+valor);
+            //res.setText("El valor por la entrega del paquete es de: "+valor);
+            Intent i = new Intent(MainActivity.this,Respuesta.class); // Creo intent que referencie la primera y segunda ventana
+            i.putExtra("ubicacion",ubi.getSelectedItem()+"");
+            i.putExtra("pais",pai.getSelectedItem()+"");
+            i.putExtra("costo",valor+"");// Paso el parametro nombre con el metodo putExtra
+            startActivity(i);// Activo la intención que se va a enviar
         }
     }
 

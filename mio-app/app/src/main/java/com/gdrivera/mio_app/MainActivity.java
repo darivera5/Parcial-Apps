@@ -2,12 +2,14 @@ package com.gdrivera.mio_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.AlertDialog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,38 +68,58 @@ public class MainActivity extends AppCompatActivity {
         if(estudiante){
             // 40% de descuesto
             Double resultado = precioTiquete * DESCUENTO40;
-            respuesta(40, resultado, "Ser estudiante");
+            respuesta(40, resultado, " Por ser estudiante aplicas para un descuento");
 
         }else if(familia){
             // Familia númerosa 70% de descuento
             Double resultado = precioTiquete * DESCUENTO70;
-            respuesta(70, resultado, "tener familia numerosa");
+            respuesta(70, resultado, " Por tener familia numerosa aplicas para un descuento");
 
-        } else if(edad < 4){
+        } else if(edad < 4 ){
             // Es gratis
-            tvResultado.setText("Menor de 4 años va gratis");
+            //tvResultado.setText("Menor de 4 años va gratis");
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this); //instancia de la alerta
+            dialogBuilder.setMessage("Menor de 4 años va gratis"); //setiamos el mensaje a mostrar
+
+            dialogBuilder.setCancelable(true).setTitle("Gratis");//Titulo de la ventana y que se pueda cancelar
+
+            dialogBuilder.create().show(); // Mostrar Ventana
 
         }else if(edad >= 4 && edad <= 7){
             // 40% de descuento
             Double resultado = precioTiquete * DESCUENTO40;
-            respuesta(40, resultado, "tener edad entre 4 y 7 años");
+            respuesta(40, resultado, " Por tener edad entre 4 y 7 años aplicas para un descuento");
 
         }else if(edad > 65){
             // 40% de descuento
             Double resultado = precioTiquete * DESCUENTO40;
-            respuesta(40, resultado, "tener edad mayor de 65");
+            respuesta(40, resultado, "Por tener edad mayor de 65 aplicas par aun descuento");
         }else{
             // No aplica descuento
             String mensaje = "No aplicas para el descuento, precio del tiquete: $" + precioTiquete;
-            tvResultado.setText(mensaje);
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this); //instancia de la alerta
+            dialogBuilder.setMessage(mensaje); //setiamos el mensaje a mostrar
+
+            dialogBuilder.setCancelable(true).setTitle("Cotización denegada");//Titulo de la ventana y que se pueda cancelar
+
+            dialogBuilder.create().show(); // Mostrar Ventana
+
+            //tvResultado.setText(mensaje);
         }
     }
 
     // Metodo que construye una respuesta basandose en las entradas
     public void respuesta(int porcentaje, Double descuento, String tipo){
         String mensaje;
-        mensaje = "por " + tipo + " se ha aplicado un descuento del " + porcentaje + "%" +
-                " tu tiquete te cuesta: $" + descuento;
-        tvResultado.setText(mensaje);
+       // mensaje = "por " + tipo + " se ha aplicado un descuento del " + porcentaje + "%" +
+                //" tu tiquete te cuesta: $" + descuento;
+        String porcen = String.valueOf(porcentaje);
+        String descuent = String.valueOf(descuento);
+        Intent i = new Intent(MainActivity.this,Respuesta.class);
+        i.putExtra("tipo",tipo);
+        i.putExtra("descuento",descuent);
+        i.putExtra("porcentaje",porcen);
+        startActivity(i);
+        //tvResultado.setText(mensaje);
     }
 }
