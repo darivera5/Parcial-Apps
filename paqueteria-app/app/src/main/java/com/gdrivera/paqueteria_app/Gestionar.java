@@ -16,9 +16,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
-
-
-
     public class Gestionar extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
         //Declaración del nombre y el peso
         private EditText etNombre, etZona, etPeso, etCosto;
@@ -88,6 +85,8 @@ import android.widget.Toast;
             //Declaración de variables para obtener valores de los elementos.
             etNombre = (EditText) findViewById(R.id.etNombre);
             etPeso = (EditText) findViewById(R.id.etPeso);
+            etZona = (EditText) findViewById(R.id.etZona);
+            etCosto = (EditText) findViewById(R.id.etCosto);
             ubi = (Spinner) findViewById(R.id.spContinente);
             pai = (Spinner) findViewById(R.id.spPais);
 
@@ -153,13 +152,39 @@ import android.widget.Toast;
 
             Cursor fila = bd.rawQuery("SELECT nombre_producto, zona, peso, continente, pais, costo" +
                     " FROM paquetes" +
-                    " WHERE nombre_producto =" + nombre, null);
+                    " WHERE nombre_producto =" + "'" + nombre + "'", null);
 
             if (fila.moveToFirst()) {
+
                 etNombre.setText(fila.getString(0));
                 etZona.setText(fila.getString(1));
                 etPeso.setText(fila.getString(2));
                 etCosto.setText(fila.getString(5));
+
+                /**
+                 * Código para spinner continente
+                 * */
+                String[] continente = {
+                        fila.getString(3)
+                };
+                adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, continente);
+                ubi.setAdapter(adapter);
+                /**
+                 * Código spinner continente
+                 * */
+
+                /**
+                 * Código para spinner pais
+                 * */
+                String[] pais = {
+                        fila.getString(4)
+                };
+                adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, pais);
+                pai.setAdapter(adapter);
+                /**
+                 * Código spinner pais
+                 * */
+
             } else {
                 Toast.makeText(this, "No existe el producto con ese nombre",
                         Toast.LENGTH_SHORT).show();
@@ -184,7 +209,7 @@ import android.widget.Toast;
                 Toast.makeText(this, "Deja el campo vacío",
                         Toast.LENGTH_SHORT).show();
             } else {
-                int cant = bd.delete("paquetes", "nombre_producto=" + nombre, null);
+                int cant = bd.delete("paquetes", "nombre_producto=" + "'" + nombre + "'", null);
 
                 bd.close();
 
@@ -229,7 +254,7 @@ import android.widget.Toast;
 
             int cant = bd.update("paquetes",
                     registro,
-                    "nombre_producto=" + nombre,
+                    "nombre_producto=" + "'" + nombre + "'",
                     null);
 
             bd.close();
