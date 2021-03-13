@@ -260,6 +260,10 @@ import android.widget.Toast;
             bd.close();
 
             if (cant == 1) {
+                etNombre.setText("");
+                etCosto.setText("");
+                etPeso.setText("");
+                etZona.setText("");
                 Toast.makeText(this, "Se modificaron los datos", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "no se modificaron los datos", Toast.LENGTH_SHORT).show();
